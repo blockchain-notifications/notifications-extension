@@ -20,11 +20,36 @@ export const Notifications = () => {
       text: 'Poka',
       title: 'KEKEK',
     },
+    {
+      id: '3',
+      text: 'Poka',
+      title: 'KEKEK',
+    },
+    {
+      id: '3',
+      text: 'Poka',
+      title: 'KEKEK',
+    },
+    {
+      id: '3',
+      text: 'Poka',
+      title: 'KEKEK',
+    },
+    {
+      id: '3',
+      text: 'Poka',
+      title: 'KEKEK',
+    },
+    {
+      id: '3',
+      text: 'Poka',
+      title: 'KEKEK',
+    },
   ]
 
 
   return (
-    <div className="NotificationsContainer" onClick={() => sendNotificationMessage({ title: 'kek', message: 'lol', id: 'asdasd' })}>
+    <div className="NotificationsContainer" >
       {notifications.map((notification) => <Notification {...notification} key={notification.id} />)}
     </div>
   )

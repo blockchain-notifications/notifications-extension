@@ -5,9 +5,13 @@
   "browser_action": {
     "default_popup": "index.html"
   },
+  "icons": {
+    "16": "notification.png",
+    "48": "notification.png",
+    "128": "notification.png"
+  },
   "permissions": [
-    "notifications",
-    "alarms"
+    "notifications"
   ],
   "background": {
     "scripts": [
