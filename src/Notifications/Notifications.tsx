@@ -1,29 +1,31 @@
 import React from "react"
+import { sendNotificationMessage } from "../helpers/sendNotificationMessage"
 import { Notification } from "./Notification/Notification"
 import './Notifications.css'
 
 export const Notifications = () => {
   const notifications = [
     {
-      id: 1,
+      id: '1',
       text: 'Privet',
       title: 'Kek',
     },
     {
-      id: 2,
+      id: '2',
       text: 'Hi',
       title: 'Lol',
     },
     {
-      id: 3,
+      id: '3',
       text: 'Poka',
       title: 'KEKEK',
     },
   ]
 
+
   return (
-    <div className="NotificationsContainer">
-      {notifications.map((notification) => <Notification {...notification} key={notification.id}/>)}
+    <div className="NotificationsContainer" onClick={() => sendNotificationMessage({ title: 'kek', message: 'lol', id: 'asdasd' })}>
+      {notifications.map((notification) => <Notification {...notification} key={notification.id} />)}
     </div>
   )
 }

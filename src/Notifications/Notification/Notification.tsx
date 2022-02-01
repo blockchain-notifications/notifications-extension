@@ -3,7 +3,7 @@ import './Notification.css'
 
 
 interface INotification {
-  id: number
+  id: string
   text: string
   title: string
 }
