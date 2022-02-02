@@ -3,23 +3,30 @@ import './Notification.css'
 
 
 interface INotification {
-  id: string
-  text: string
-  title: string
-  isRead: boolean
+  tx_hash: string
+  is_read: boolean
+  data: string
+  event: string
+  sender: string
 }
 
-export const Notification: FC<INotification> = ({ id, text, title, isRead }) => {
+export const Notification: FC<INotification> = ({ event, tx_hash, is_read, data, sender }) => {
 
 
   return (
-    <div className={isRead ? 'NotificationRead' : 'Notification'}>
+    <div className={is_read ? 'NotificationRead' : 'Notification'}>
       <div className='Title'>
-        {title}
+        {tx_hash}
       </div>
 
       <div className='Text'>
-        {text}
+        Sender: {sender}
+      </div>
+      <div className='Text'>
+        Event: {event}
+      </div>
+      <div className='Text'>
+        Data: {data}
       </div>
     </div>
   )

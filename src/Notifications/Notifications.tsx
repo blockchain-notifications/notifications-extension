@@ -26,23 +26,29 @@ export const Notifications: FC<INotifications> = ({userId}) => {
 
   useEffect(() => {
     if (lastMessage !== null) {
-      setNotifications(prev => prev.concat(lastMessage))
+      const data = JSON.parse(JSON.parse(lastMessage.data)) as any
+      setNotifications(prev => [data].concat(prev))
+      sendNotificationMessage({
+        title: 'Transaction finished',
+        message: `Transaction hash: ${data.tx_hash}`,
+        id: data.tx_hash || 'NO_ID'
+      })
     }
     console.log(lastMessage, 'message')
   }, [lastMessage])
 
 
   const getNotificationsCallback = useCallback(async () => {
-    console.log('here')
     const notReadNotifs = await getNotifications(userId, false)
     const readNotifs = await getNotifications(userId, true)
+
     console.log(readNotifs, notReadNotifs)
-    setNotifications((prev) => prev.concat(notReadNotifs))
-    setNotifications((prev) => prev.concat(readNotifs))
+    setNotifications(notReadNotifs)
+    setNotifications((prev) => prev.concat(readNotifs.reverse()))
   }, [userId])
 
   const readAllCallback = useCallback(async () => {
-
+    const notReadNotifs = notifications.filter((n) => !n.is_read)
   }, [notifications])
 
   useEffect(() => {
@@ -53,27 +59,6 @@ export const Notifications: FC<INotifications> = ({userId}) => {
     console.log(notifications)
   }, [notifications])
 
-  const notifications1 = [
-    {
-      id: '1',
-      text: 'Privet',
-      title: 'Kek',
-      isRead: true,
-    },
-    {
-      id: '2',
-      text: 'Hi',
-      title: 'Lol',
-      isRead: false,
-    },
-    {
-      id: '3',
-      text: 'Poka',
-      title: 'KEKEK',
-      isRead: false,
-    },
-  ]
-
 
   return (
     <div className="NotificationsContainer">
@@ -82,7 +67,7 @@ export const Notifications: FC<INotifications> = ({userId}) => {
         <img src={updateIcon} alt={'update'} width={20} height={20} onClick={getNotificationsCallback} style={{cursor: 'pointer'}}/>
       </div>
       <div onClick={() => sendNotificationMessage({ title: 'kek', message: 'lol', id: 'asdasd' })} className="notifications">
-        {notifications1.map((notification) => <Notification {...notification} key={notification.id} />)}
+        {notifications.map((notification) => <Notification {...notification} key={notification.tx_hash} />)}
       </div>
     </div>
   )
