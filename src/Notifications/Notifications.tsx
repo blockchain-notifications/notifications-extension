@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState, FC } from "react"
 
 import useWebSocket from 'react-use-websocket'
 
-import { sendNotificationMessage } from "../helpers/sendNotificationMessage"
+import { sendBackgroundMessage } from "../helpers/sendBackgroundMessage"
 import { API_ADDR, API_PORT } from "./consts"
 import { Notification } from "./Notification/Notification"
 import './Notifications.css'
@@ -28,7 +28,7 @@ export const Notifications: FC<INotifications> = ({userId}) => {
     if (lastMessage !== null) {
       const data = JSON.parse(JSON.parse(lastMessage.data)) as any
       setNotifications(prev => [data].concat(prev))
-      sendNotificationMessage({
+      sendBackgroundMessage({
         title: 'Transaction finished',
         message: `Transaction hash: ${data.tx_hash}`,
         id: data.tx_hash || 'NO_ID'
@@ -66,7 +66,7 @@ export const Notifications: FC<INotifications> = ({userId}) => {
         <div className={'read'} onClick={readAllCallback}>Read all</div>
         <img src={updateIcon} alt={'update'} width={20} height={20} onClick={getNotificationsCallback} style={{cursor: 'pointer'}}/>
       </div>
-      <div onClick={() => sendNotificationMessage({ title: 'kek', message: 'lol', id: 'asdasd' })} className="notifications">
+      <div onClick={() => sendBackgroundMessage({ title: 'kek', message: 'lol', id: 'asdasd' })} className="notifications">
         {notifications.map((notification) => <Notification {...notification} key={notification.tx_hash} />)}
       </div>
     </div>

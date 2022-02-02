@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
+import { sendBackgroundMessage } from './helpers/sendBackgroundMessage'
 import { Notifications } from './Notifications/Notifications'
 import { Wallet } from './Wallet/Wallet'
 
@@ -11,6 +12,10 @@ function App() {
       setUserId(res.wallet)
     })
   }, [setUserId])
+
+  useEffect(() => {
+    // sendBackgroundMessage({title: 'connect', message: '', id: userId})
+  }, [userId])
   
   return (
     <div className="App">
@@ -21,3 +26,5 @@ function App() {
 }
 
 export default App
+
+
