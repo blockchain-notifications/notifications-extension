@@ -6,11 +6,14 @@ interface INotification {
   id: string
   text: string
   title: string
+  isRead: boolean
 }
 
-export const Notification: FC<INotification> = ({ id, text, title }) => {
+export const Notification: FC<INotification> = ({ id, text, title, isRead }) => {
+
+
   return (
-    <div className='Notification'>
+    <div className={isRead ? 'NotificationRead' : 'Notification'}>
       <div className='Title'>
         {title}
       </div>

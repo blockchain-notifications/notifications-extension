@@ -21,6 +21,7 @@ export const Notifications: FC<INotifications> = ({userId}) => {
 
   const [notifications, setNotifications] = useState<any[]>([])
 
+
   const { lastMessage } = useWebSocket(socketAddr)
 
   useEffect(() => {
@@ -51,16 +52,19 @@ export const Notifications: FC<INotifications> = ({userId}) => {
       id: '1',
       text: 'Privet',
       title: 'Kek',
+      isRead: true,
     },
     {
       id: '2',
       text: 'Hi',
       title: 'Lol',
+      isRead: false,
     },
     {
       id: '3',
       text: 'Poka',
       title: 'KEKEK',
+      isRead: false,
     },
   ]
 
