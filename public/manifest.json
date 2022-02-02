@@ -7,12 +7,14 @@
   },
   "permissions": [
     "notifications",
-    "alarms"
+    "storage"
   ],
+  "icons": {
+    "16": "notification.png"
+  },
   "background": {
     "scripts": [
       "watchNotifications.js"
     ]
   }
-
 }
