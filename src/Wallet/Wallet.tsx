@@ -6,7 +6,7 @@ interface IWallet {
   userId: string
 }
 
-export const Wallet: FC<IWallet> = ({userId, setUserId}) => {
+export const Wallet: FC<IWallet> = ({ userId, setUserId }) => {
   const [value, setValue] = useState(userId)
 
   useEffect(() => {
@@ -18,18 +18,22 @@ export const Wallet: FC<IWallet> = ({userId, setUserId}) => {
   }, [setValue])
 
   const handleSubmit = useCallback(() => {
-    chrome.storage.local.set({ "wallet": value });
+    chrome.storage.local.set({ "wallet": value })
     setUserId(value)
   }, [value, setUserId])
 
   return (
     <div className='Wallet'>
+      <div className='inputContainer'>
         <label>
           Enter your wallet address
-          <input type="text" value={value} onChange={handleChange} className={'input'}/>
+          <input type="text" value={value} onChange={handleChange} className={'input'} />
         </label>
+      </div>
 
+      <div className={'btnContainer'}>
         <div onClick={handleSubmit} className='btn'>Save</div>
+      </div>
     </div>
   )
 }

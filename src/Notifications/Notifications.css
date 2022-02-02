@@ -3,7 +3,10 @@
   flex-direction: column;
   gap: 10px;
 
+  background: linear-gradient(#f4f6f7, #a9d4f7) fixed;
+
   padding: 20px;
+  padding-bottom: 0px;
 }
 
 .header {
