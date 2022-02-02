@@ -10,7 +10,9 @@
     "storage"
   ],
   "icons": {
-    "16": "notification.png"
+    "16": "notification.png",
+    "48": "notification.png",
+    "128": "notification.png"
   },
   "background": {
     "scripts": [

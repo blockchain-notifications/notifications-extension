@@ -1,23 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, FC, useState } from 'react'
 import './Wallet.css'
 
+interface IWallet {
+  setUserId: React.Dispatch<React.SetStateAction<string>>
+  userId: string
+}
 
-export const Wallet = () => {
-  const [value, setValue] = useState('')
+export const Wallet: FC<IWallet> = ({userId, setUserId}) => {
+  const [value, setValue] = useState(userId)
+
+  useEffect(() => {
+    setValue(userId)
+  }, [userId])
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)
-  }, [])
+  }, [setValue])
 
   const handleSubmit = useCallback(() => {
     chrome.storage.local.set({ "wallet": value });
-  }, [value])
-
-  useEffect(() => {
-    chrome.storage.local.get(["wallet"], (res) => {
-      setValue(res.wallet)
-    })
-  }, [])
+    setUserId(value)
+  }, [value, setUserId])
 
   return (
     <div className='Wallet'>

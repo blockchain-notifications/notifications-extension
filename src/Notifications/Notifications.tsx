@@ -1,28 +1,22 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState, FC } from "react"
 
-import useWebSocket, { ReadyState } from 'react-use-websocket'
+import useWebSocket from 'react-use-websocket'
 
 
 import { sendNotificationMessage } from "../helpers/sendNotificationMessage"
+import { API_ADDR, API_PORT } from "./consts"
 import { Notification } from "./Notification/Notification"
 import './Notifications.css'
 import { getNotifications } from "./utils"
 
-export const Notifications = () => {
-  const PROTOCOL = 'http'
-  const API_ADDR = 'localhost'
-  const API_PORT = '80'
+interface INotifications {
+  userId: string
+}
+
+export const Notifications: FC<INotifications> = ({userId}) => {
   const socketUrl = `ws://${API_ADDR}:${API_PORT}/ws/`
-  const [userId, setUserId] = useState('')
 
-  const socketAddr = useMemo(() => socketUrl + userId, [userId])
-
-  const updateId = () => {
-    chrome.storage.local.get(["wallet"], (res) => {
-      console.log(res)
-      setUserId(res.wallet)
-    })
-  }
+  const socketAddr = useMemo(() => socketUrl + userId, [userId, socketUrl])
 
   const [notifications, setNotifications] = useState<any[]>([])
 
@@ -35,9 +29,6 @@ export const Notifications = () => {
     console.log(lastMessage, 'message')
   }, [lastMessage])
 
-  useEffect(() => {
-    updateId()
-  }, [])
 
   const getNotificationsCallback = useCallback(async () => {
     console.log('here')
