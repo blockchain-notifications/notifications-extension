@@ -2,12 +2,13 @@ import React, { useCallback, useEffect, useMemo, useState, FC } from "react"
 
 import useWebSocket from 'react-use-websocket'
 
-
 import { sendNotificationMessage } from "../helpers/sendNotificationMessage"
 import { API_ADDR, API_PORT } from "./consts"
 import { Notification } from "./Notification/Notification"
 import './Notifications.css'
 import { getNotifications } from "./utils"
+
+import updateIcon from './icons/update.png'
 
 interface INotifications {
   userId: string
@@ -67,7 +68,7 @@ export const Notifications: FC<INotifications> = ({userId}) => {
   return (
     <div className="NotificationsContainer">
       <div onClick={getNotificationsCallback} className={'update'}>
-        Update
+        <img src={updateIcon} alt={'update'} width={20} height={20} onClick={getNotificationsCallback} style={{cursor: 'pointer'}}/>
       </div>
       <div onClick={() => sendNotificationMessage({ title: 'kek', message: 'lol', id: 'asdasd' })} className="notifications">
         {notifications1.map((notification) => <Notification {...notification} key={notification.id} />)}
