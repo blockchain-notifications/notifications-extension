@@ -1,4 +1,13 @@
+var ws;
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'reconnect') {
+    if (ws) {
+      ws.close()
+    }
+    ws = undefined
+    connect()
+  }
   if (message.type === 'updateId') {
     connect()
   }
@@ -6,7 +15,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 function connect() {
   chrome.storage.local.get(["wallet"], (res) => {
-    const ws = new WebSocket('ws://51.158.148.158:3000/ws/' + res.wallet)
+    if (ws) return
+
+    ws = new WebSocket('ws://51.158.148.158:3000/ws/' + res.wallet)
 
     ws.onopen = function () {
       console.log('connected')
@@ -14,6 +25,8 @@ function connect() {
 
     ws.onclose = function () {
       console.log('disconnected')
+      ws = undefined
+      connect()
     }
 
     ws.onmessage = (m) => {
@@ -31,4 +44,10 @@ function connect() {
   })
 }
 
-connect()
+(function () {
+  chrome.browserAction.onClicked.addListener(function () {
+    if (ws === undefined) {
+      connect()
+    }
+  })
+})()
