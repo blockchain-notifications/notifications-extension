@@ -36,7 +36,7 @@ const Notifications: FC<INotifications> = ({userId}) => {
   return (
     <div className="NotificationsContainer">
       <div onClick={getNotificationsCallback} className={'header'}>
-        <div className={'read'} onClick={readAllCallback}>Read all</div>
+        {/* <div className={'read'} onClick={readAllCallback}>Read all</div> */}
         <img src={updateIcon} alt={'update'} width={20} height={20} onClick={getNotificationsCallback} style={{cursor: 'pointer'}}/>
       </div>
       <div className="notifications">
