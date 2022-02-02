@@ -34,10 +34,16 @@ export const Notifications: FC<INotifications> = ({userId}) => {
 
   const getNotificationsCallback = useCallback(async () => {
     console.log('here')
-    const notifs = await getNotifications(userId, true)
-    console.log(notifs)
-    setNotifications(notifs)
+    const notReadNotifs = await getNotifications(userId, false)
+    const readNotifs = await getNotifications(userId, true)
+    console.log(readNotifs, notReadNotifs)
+    setNotifications((prev) => prev.concat(notReadNotifs))
+    setNotifications((prev) => prev.concat(readNotifs))
   }, [userId])
+
+  const readAllCallback = useCallback(async () => {
+
+  }, [notifications])
 
   useEffect(() => {
     getNotificationsCallback()
@@ -71,7 +77,8 @@ export const Notifications: FC<INotifications> = ({userId}) => {
 
   return (
     <div className="NotificationsContainer">
-      <div onClick={getNotificationsCallback} className={'update'}>
+      <div onClick={getNotificationsCallback} className={'header'}>
+        <div className={'read'} onClick={readAllCallback}>Read all</div>
         <img src={updateIcon} alt={'update'} width={20} height={20} onClick={getNotificationsCallback} style={{cursor: 'pointer'}}/>
       </div>
       <div onClick={() => sendNotificationMessage({ title: 'kek', message: 'lol', id: 'asdasd' })} className="notifications">
