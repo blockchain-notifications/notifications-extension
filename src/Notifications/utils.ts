@@ -1,8 +1,8 @@
 import { API_ADDR, API_PORT, PROTOCOL } from "./consts"
 
-export const getNotifications = async (clientId: string, isRead: boolean) => {
+export const getNotifications = async (clientId: string) => {
   const response = await fetch(
-    `${PROTOCOL}://${API_ADDR}:${API_PORT}/notifications?client_id=${clientId}&is_read=${isRead}`,
+    `${PROTOCOL}://${API_ADDR}:${API_PORT}/notifications?client_id=${clientId}`,
     {
       method: 'GET', headers: {
         'Content-Type': 'application/json'

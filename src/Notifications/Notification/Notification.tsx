@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import './Notification.css'
 
 
@@ -10,9 +10,7 @@ interface INotification {
   sender: string
 }
 
-export const Notification: FC<INotification> = ({ event, tx_hash, is_read, data, sender }) => {
-
-
+const Notification: FC<INotification> = ({ event, tx_hash, is_read, data, sender }) => {
   return (
     <div className={is_read ? 'NotificationRead' : 'Notification'}>
       <div className='Title'>
@@ -31,3 +29,5 @@ export const Notification: FC<INotification> = ({ event, tx_hash, is_read, data,
     </div>
   )
 }
+
+export default memo(Notification)

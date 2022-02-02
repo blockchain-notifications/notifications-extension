@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, FC, useState } from 'react'
+import React, { useCallback, useEffect, FC, useState, memo } from 'react'
+import { sendBackgroundMessage } from '../helpers/sendBackgroundMessage'
 import './Wallet.css'
 
 interface IWallet {
@@ -6,7 +7,7 @@ interface IWallet {
   userId: string
 }
 
-export const Wallet: FC<IWallet> = ({ userId, setUserId }) => {
+const Wallet: FC<IWallet> = ({ userId, setUserId }) => {
   const [value, setValue] = useState(userId)
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export const Wallet: FC<IWallet> = ({ userId, setUserId }) => {
   const handleSubmit = useCallback(() => {
     chrome.storage.local.set({ "wallet": value })
     setUserId(value)
+    sendBackgroundMessage({type: 'updateId'})
   }, [value, setUserId])
 
   return (
@@ -37,3 +39,5 @@ export const Wallet: FC<IWallet> = ({ userId, setUserId }) => {
     </div>
   )
 }
+
+export default memo(Wallet)

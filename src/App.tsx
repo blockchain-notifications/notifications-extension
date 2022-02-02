@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import { Notifications } from './Notifications/Notifications'
-import { Wallet } from './Wallet/Wallet'
+import Notifications from './Notifications/Notifications'
+import Wallet from './Wallet/Wallet'
 
 function App() {
   const [userId, setUserId] = useState('')
@@ -11,7 +11,7 @@ function App() {
       setUserId(res.wallet)
     })
   }, [setUserId])
-  
+
   return (
     <div className="App">
       <Wallet setUserId={setUserId} userId={userId}/>
