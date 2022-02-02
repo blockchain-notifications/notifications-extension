@@ -19,6 +19,6 @@
     "scripts": [
       "watchNotifications.js"
     ],
-    "persistent": false
+    "persistent": true
   }
 }

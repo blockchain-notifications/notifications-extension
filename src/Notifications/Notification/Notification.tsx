@@ -20,9 +20,9 @@ const Notification: FC<INotification> = ({ event, tx_hash, is_read, data, sender
       <div className='Text'>
         Sender: {sender}
       </div>
-      <div className='Text'>
+      {/* <div className='Text'>
         Hash: {tx_hash}
-      </div>
+      </div> */}
       <div className='Text'>
         Data: {data}
       </div>

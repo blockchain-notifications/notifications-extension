@@ -15,35 +15,13 @@ interface INotifications {
 }
 
 const Notifications: FC<INotifications> = ({userId}) => {
-  const socketUrl = `ws://${API_ADDR}:${API_PORT}/ws/`
-
-  const socketAddr = useMemo(() => socketUrl + userId, [userId, socketUrl])
-
   const [notifications, setNotifications] = useState<any[]>([])
 
-  // const { lastMessage } = useWebSocket(socketAddr)
-
-  // useEffect(() => {
-  //   if (lastMessage !== null) {
-  //     const data = JSON.parse(JSON.parse(lastMessage.data)) as any
-  //     setNotifications(prev => [data].concat(prev))
-  //     sendBackgroundMessage({
-  //       type: 'notification',
-  //       title: `${data.event}`,
-  //       message: `Transaction hash: ${data.tx_hash}`,
-  //       id: data.tx_hash || 'NO_ID'
-  //     })
-  //   }
-  //   console.log(lastMessage, 'message')
-  // }, [lastMessage])
-
-
   const getNotificationsCallback = useCallback(async () => {
-    // const notReadNotifs = await getNotifications(userId, false)
     const notifications = await getNotifications(userId)
 
     console.log(notifications)
-    setNotifications(notifications)
+    setNotifications(notifications.reverse())
   }, [userId])
 
   const readAllCallback = useCallback(async () => {
