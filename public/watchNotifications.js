@@ -1,15 +1,4 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === 'notification') {
-    chrome.notifications.create(`${message.id}`, {
-      type: 'basic',
-      iconUrl: 'notification.png',
-      title: `${message.title}`,
-      message: `${message.message}`,
-      priority: 2
-    })
-    connect()
-  }
-
   if (message.type === 'updateId') {
     connect()
   }

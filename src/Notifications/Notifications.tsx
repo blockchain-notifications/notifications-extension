@@ -1,9 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState, FC, memo } from "react"
+import React, { useCallback, useEffect, useState, FC, memo } from "react"
 
-import useWebSocket from 'react-use-websocket'
-
-import { sendBackgroundMessage } from "../helpers/sendBackgroundMessage"
-import { API_ADDR, API_PORT } from "./consts"
 import Notification  from "./Notification/Notification"
 import './Notifications.css'
 import { getNotifications } from "./utils"

@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <Wallet setUserId={setUserId} userId={userId}/>
-      <Notifications userId={userId}/>
+      {userId !== '' && <Notifications userId={userId}/>}
     </div>
   )
 }
