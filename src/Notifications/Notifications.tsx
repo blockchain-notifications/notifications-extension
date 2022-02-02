@@ -29,7 +29,7 @@ export const Notifications: FC<INotifications> = ({userId}) => {
       const data = JSON.parse(JSON.parse(lastMessage.data)) as any
       setNotifications(prev => [data].concat(prev))
       sendNotificationMessage({
-        title: 'Transaction finished',
+        title: `${data.event}`,
         message: `Transaction hash: ${data.tx_hash}`,
         id: data.tx_hash || 'NO_ID'
       })

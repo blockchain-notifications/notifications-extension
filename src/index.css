@@ -1,13 +1,22 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Gotham;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+@font-face {
+  font-family: 'Gotham';
+  src: local('Gotham'), url(./fonts/Gotham/GothamMedium_1.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Gotham';
+    font-weight: 900;
+    src: local('Gotham'), url(./fonts/Gotham/GothamBold.ttf) format('truetype');
 }

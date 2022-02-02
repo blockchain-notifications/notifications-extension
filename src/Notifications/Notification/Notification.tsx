@@ -16,14 +16,14 @@ export const Notification: FC<INotification> = ({ event, tx_hash, is_read, data,
   return (
     <div className={is_read ? 'NotificationRead' : 'Notification'}>
       <div className='Title'>
-        {tx_hash}
+        {event}
       </div>
 
       <div className='Text'>
         Sender: {sender}
       </div>
       <div className='Text'>
-        Event: {event}
+        Hash: {tx_hash}
       </div>
       <div className='Text'>
         Data: {data}
